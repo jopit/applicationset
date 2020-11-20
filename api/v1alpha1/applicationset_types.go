@@ -38,9 +38,10 @@ type ApplicationSetTemplate struct {
 
 // ApplicationSetGenerator include list item info
 type ApplicationSetGenerator struct {
-	List     *ListGenerator    `json:"list,omitempty"`
-	Clusters *ClusterGenerator `json:"clusters,omitempty"`
-	Git      *GitGenerator     `json:"git,omitempty"`
+	List     *ListGenerator     `json:"list,omitempty"`
+	Clusters *ClusterGenerator  `json:"clusters,omitempty"`
+	Git      *GitGenerator      `json:"git,omitempty"`
+	PropList *PropListGenerator `json:"proplist,omitempty"`
 }
 
 // ListGenerator include items info
@@ -71,6 +72,17 @@ type GitGenerator struct {
 
 type GitDirectoryGeneratorItem struct {
 	Path string `json:"path"`
+}
+
+// PropListGenerator includes element info
+type PropListGenerator struct {
+	Elements []PropListGeneratorElement `json:"elements"`
+}
+
+// PropListGeneratorElement includes a name value pair
+type PropListGeneratorElement struct {
+	Name  string `json:"name"`
+	Value string `json:"value"`
 }
 
 // +kubebuilder:object:root=true

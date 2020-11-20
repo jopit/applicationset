@@ -1,0 +1,34 @@
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+metadata:
+  name: proplist
+spec:
+  generators:
+  - proplist:
+      elements:
+      - name: name
+        value: argocd-001
+      - name: repo
+        value: "https://github.com/jopit/kube-gitops-apps.git"
+      - name: path
+        value: proplist/apps/argocd-0001 
+  - proplist:
+      elements:
+      - name: name
+        value: argocd-002
+      - name: repo
+        value: "https://github.com/jopit/kube-gitops-apps.git"
+      - name: path
+        value: proplist/apps/argocd-0002
+  template:
+    metadata:
+      name: '{{name}}'
+    spec:
+      project: ""
+      source:
+        repoURL: '{{repo}}'
+        targetRevision: HEAD
+        path: '{{path}}'
+      destination:
+        server: https://kubernetes.default.svc
+        namespace: default
